@@ -1,0 +1,29 @@
+.toc {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc-item a {
+  display: inline-block;
+  padding: 5px 0;
+  text-decoration: none;
+}
+.toc-item-2 {
+  margin-left: 1em;
+}
+.toc-item-3 {
+  margin-left: 2em;
+}
+.toc-item-4 {
+  margin-left: 3em;
+}
+.toc-item-5 {
+  margin-left: 4em;
+}
+.toc-item-6 {
+  margin-left: 5em;
+}
