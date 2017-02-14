@@ -1,7 +1,7 @@
 /*!
 TocJS
 
-Version: 0.1.0
+Version: 0.2.0
 Author: e-JOINT.jp
 AUtohr URL: http://e-joint.jp
 Plugin URL: http://e-joint.jp/
@@ -26,14 +26,14 @@ Licensed under MIT (http://opensource.org/licenses/MIT)
 
     options = $.extend({
       excludes: 'toc-exclude', //このクラス名がついている見出しは除外する
-      headings: 'h2, h3', //対象とする見出しの要素をカンマ区切りで
-      includes: null, //ここで指定した要素のみを目次対象とする
-      output: '.toc', //目次を出力する要素を指定する
-      min: 4, //目次を表示する最小数
-      tocNumber: true, //目次に番号をつける
       headingNumber: true, //見出しに番号をつける
+      headings: 'h2, h3', //対象とする見出しの要素をカンマ区切りで
+      includes: '', //ここで指定した要素のみを目次対象とする
+      min: 4, //目次を表示する最小数
+      output: '.toc', //目次を出力する要素を指定する
       title: 'Contents', //目次のタイトル
       titleElement: 'h2' //目次のタイトルを表示する要素
+      tocNumber: true, //目次に番号をつける
     }, options);
 
     return this.each(function() {

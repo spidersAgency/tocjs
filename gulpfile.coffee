@@ -13,6 +13,7 @@ dir =
   src: './src'
   test: './test'
   dist: './dist'
+  docs: './docs'
 
 path =
   src: dir.src
@@ -22,6 +23,7 @@ path =
   coffeeAll: dir.src + '/_coffee/all'
   jsSrc: dir.src + '/_js'
   jsAllSrc: dir.src + '/_js/all'
+  assets: dir.docs + '/assets'
 
   css: dir.test
   js: dir.test
@@ -72,6 +74,9 @@ gulp.task 'js', ->
 gulp.task 'copy', ->
   gulp.src dir.test + '/**/tocjs*'
     .pipe gulp.dest dir.dist
+
+  gulp.src dir.test + '/**/*.min.*'
+    .pipe gulp.dest path.assets
 
 
 #Build
