@@ -10,7 +10,7 @@ There are functions such as selection of heading target tag (h1-6), display / no
 
 ## Sample
 
-[View Sample](https://ejointjp@github.io/tocjs/2017/02/14/sample.html);
+[View Sample](https://ejointjp.github.io/tocjs/2017/02/14/sample.html)
 
 
 
