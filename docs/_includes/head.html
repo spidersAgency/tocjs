@@ -25,6 +25,11 @@
 	<link href="//fonts.googleapis.com/css?family={{ site.theme_settings.google_fonts }}" rel="stylesheet" type="text/css">
 	{% endif %}
 
+	<!-- TocJS -->
+	<link rel="stylesheet" href="{{ "/assets/tocjs.min.css" | prepend: site.baseurl }}">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="{{ "/assets/tocjs.min.js" | prepend: site.baseurl }}"></script>
+
 	<!-- KaTeX -->
 	{% if site.theme_settings.katex %}
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
