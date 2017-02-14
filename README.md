@@ -8,6 +8,12 @@ Based on the headings tag (h1 - 6) of the article, the plugin automatically crea
 
 There are functions such as selection of heading target tag (h1-6), display / non - display of table of contents number, exclusion setting and so on.
 
+## Sample
+
+[View Sample](https://ejointjp@github.io/tocjs/2017/02/14/sample.html);
+
+
+
 ## Install and Usage
 
 Download the latest release.
@@ -45,7 +51,7 @@ $('.toc-src').tocjs();
 ## Options
 
 ```
-$('.toc-src').toc(){
+$('.toc-src').toc({
   excludes: 'toc-exclude',
   headingNumber: true,
   headings: 'h2, h3',
