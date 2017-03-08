@@ -3,7 +3,7 @@ $ = require('gulp-load-plugins')()
 browser = require 'browser-sync'
 gulp = require 'gulp'
 sequence = require 'run-sequence'
-
+del = require 'del'
 reload = browser.reload
 
 
@@ -54,9 +54,12 @@ gulp.task 'sass', ->
     .pipe $.cached 'sass'
     .pipe $.pleeease pleeeseOptions
     .pipe gulp.dest path.css
+    .pipe gulp.dest dir.dist
     .pipe $.pleeease {minifier: true}
     .pipe $.rename {suffix: '.min'}
     .pipe gulp.dest path.css
+    .pipe gulp.dest dir.dist
+
     .pipe reload {stream: true}
 
 #Js
@@ -64,26 +67,24 @@ gulp.task 'js', ->
   gulp.src path.jsSrc + '/*.js'
     .pipe $.plumber()
     .pipe gulp.dest path.js
+    .pipe gulp.dest dir.dist
     .pipe $.uglify()
     .pipe $.rename {suffix: '.min'}
     .pipe gulp.dest path.js
+    .pipe gulp.dest dir.dist
+    .pipe gulp.dest path.assets
     .pipe reload {stream: true}
 
 
-#Copy and rename
-gulp.task 'copy', ->
-  gulp.src dir.test + '/**/tocjs*'
-    .pipe gulp.dest dir.dist
-
-  gulp.src dir.test + '/**/*.min.*'
-    .pipe gulp.dest path.assets
-
+#Clean
+gulp.task 'clean', ->
+  del [dir.dist + '/**/*', dir.test + '/**/*{css,js}']
 
 #Build
 gulp.task 'build', (cb) ->
   sequence(
+    ['clean']
     ['sass', 'js']
-    ['copy']
     cb
   )
 
