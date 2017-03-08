@@ -1,16 +1,7 @@
-.toc {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
 .toc-list {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-.toc-item a {
-  display: inline-block;
-  padding: 5px 0;
-  text-decoration: none;
 }
 .toc-item-2 {
   margin-left: 1em;
