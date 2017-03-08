@@ -32,8 +32,8 @@ Licensed under MIT (http://opensource.org/licenses/MIT)
       min: 4, //目次を表示する最小数
       output: '.toc', //目次を出力する要素を指定する
       title: 'Contents', //目次のタイトル
-      titleElement: 'h2' //目次のタイトルを表示する要素
-      tocNumber: true, //目次に番号をつける
+      titleElement: 'h2', //目次のタイトルを表示する要素
+      tocNumber: true //目次に番号をつける
     }, options);
 
     return this.each(function() {
