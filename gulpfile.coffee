@@ -39,7 +39,7 @@ sassOptions =
 
 pleeeseOptions =
   autoprefixer:
-    browsers: ['ie 9', 'last 2 versions', 'android 4.1']
+    browsers: ['last 2 versions']
   minifier: false
   sourcemaps: false
   sass: false
