@@ -1,14 +1,6 @@
 $toc-level: 6 !default;
-$toc-margin: 30px 0 !default;
-$toc-padding: 20px !default;
-$toc-background: #f8f8f8 !default;
-$toc-heading-margin: 8px 0 16px 0 !default;
-$toc-a-padding: 5px !default;
 
 .toc{
-
-  margin-top: 1em;
-  margin-bottom: 1em;
 
   &-list{
     list-style: none;
@@ -17,13 +9,6 @@ $toc-a-padding: 5px !default;
   }
 
   &-item{
-    a{
-      // display: block;
-      display: inline-block;
-      padding: $toc-a-padding 0;
-      text-decoration: none;
-    }
-    $selector: &;
 
     @for $i from 2 through $toc-level {
       &-#{$i}{
