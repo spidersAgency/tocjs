@@ -1,7 +1,7 @@
 {
   "name": "TocJS",
   "version": "0.3.2",
-  "description": "It is a smooth scroll jQuery plug-in that scrolls not only in-page links but also links to other pages in the site.",
+  "description": "TocJS is a jQuery plugin that automatically create a table of contents of the article.",
   "main": "./dist/tocjs.js",
   "dependencies": {
     "jquery": "^3.2.1"
