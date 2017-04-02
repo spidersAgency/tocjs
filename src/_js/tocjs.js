@@ -1,14 +1,20 @@
 /*!
-TocJS
+ * TocJS v0.3.2
+ *
+ * Copyright 2017 e-JOINT.jp
+ * https://ejointjp.github.io/tocjs
+ * MIT license
+ */
 
-Version: 0.2.0
-Author: e-JOINT.jp
-AUtohr URL: http://e-joint.jp
-Plugin URL: http://e-joint.jp/
-Licensed under MIT (http://opensource.org/licenses/MIT)
-*/
+(function (factory) {
+  if (typeof module === "object" && typeof module.exports === "object") {
+    module.exports = factory(require("jquery"), window, document);
+  } else {
+    factory(jQuery, window, document);
+  }
+}(function($, window, document, undefined){
 
-(function($) {
+  'use srtict';
 
   //見出しに番号をつける
   var numbering = function(html, num){
@@ -160,4 +166,4 @@ Licensed under MIT (http://opensource.org/licenses/MIT)
       }
     });
   };
-})(jQuery);
+}));
