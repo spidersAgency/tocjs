@@ -1,26 +1,29 @@
 {
   "name": "tocjs",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "TocJS is a jQuery plugin that automatically create a table of contents of the article.",
   "main": "./dist/tocjs.js",
+  "style": "./dist/tocjs.css",
   "dependencies": {
     "jquery": "^3.2.1"
   },
   "devDependencies": {
-    "browser-sync": "^2.18.8",
-    "browserify": "^14.1.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-cached": "^1.1.1",
     "gulp-load-plugins": "^1.5.0",
+    "gulp-notify": "^3.0.0",
     "gulp-pleeease": "^2.0.2",
+    "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
+    "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^2.1.2",
     "gulp-watch": "^4.3.11",
+    "gulp-watchify": "^0.6.0",
+    "gulp-webserver": "^0.9.1",
     "run-sequence": "^1.2.2",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "watchify": "^3.9.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

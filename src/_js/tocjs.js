@@ -1,5 +1,5 @@
 /*!
- * TocJS v0.3.2
+ * TocJS v0.3.3
  *
  * Copyright 2017 e-JOINT.jp
  * https://ejointjp.github.io/tocjs

@@ -2,46 +2,43 @@
 
 var gulp = require('gulp');
 
-var gulpLoadPluginsOptions = {
+var loadPluginsOptions = {
   pattern: ['gulp-*', 'gulp.*'],
   replaceString: /\bgulp[\-.]/
 };
-
-var $ = require('gulp-load-plugins')(gulpLoadPluginsOptions);
-
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-
+var $ = require('gulp-load-plugins')(loadPluginsOptions);
 var del = require('del');
 var runSequence = require('run-sequence');
-var browserSync = require('browser-sync');
-
 
 // Config
 
 var dir = {
-  sass: 'src/_scss/',
+  scss: 'src/_scss/',
   js: 'src/_js/',
-  test: 'test/',
+  dest: 'test/',
   dist: 'dist/'
 };
+
+var documentRoot = dir.dest;
 
 var name = {
   js: {
     bundle: 'bundle.js',
-    demo: 'demo.js'
+    app: 'demo.js'
   }
 };
 
 var src = {
-  sass: dir.sass + '**/*.scss',
-  js: dir.js + '**/*.js',
-  jsDist: [
+  scss: dir.scss + '**/*.scss',
+  js: [
     dir.js + '**/*.js',
-    '!' + dir.js + '**/' + name.js.demo
-  ],
-  html: dir.dist + '**/*.html'
+    '!' + dir.js + '**/' + name.js.app
+  ]
+};
+
+var webserverOptions = {
+  livereload: true,
+  open: true
 };
 
 var pleeeaseOptions = {
@@ -54,24 +51,27 @@ var pleeeaseOptions = {
   mqpacker: true
 };
 
-var browserifyOptions = {
-  entries: dir.js + name.js.demo
-};
-
+var watching = false;
 
 // Tasks
 
-gulp.task('sass', function(){
-  return gulp.src(src.sass)
-    .pipe($.sass({outputStyle: 'expanded'}).on('error', $.sass.logError))
-    .pipe($.pleeease(pleeeaseOptions))
-    .pipe(gulp.dest(dir.test))
-    .pipe(browserSync.reload({stream: true}));
+gulp.task('webserver', function(){
+  gulp.src(documentRoot)
+    .pipe($.webserver(webserverOptions));
 });
 
-gulp.task('sass-build', function(){
-  return gulp.src(src.sass)
-    .pipe($.sass({outputStyle: 'expanded'}))
+gulp.task('sass', function(){
+  return gulp.src(src.scss)
+    .pipe($.plumber({errorHandler: $.notify.onError('<%= error.message %>')}))
+    .pipe($.cached())
+    .pipe($.sass({outputStyle: 'expanded'}).on('error', $.sass.logError))
+    .pipe($.pleeease(pleeeaseOptions))
+    .pipe(gulp.dest(dir.dest));
+});
+
+gulp.task('css:build', function(){
+  return gulp.src(src.scss)
+    .pipe($.sass({outputStyle: 'expanded'}).on('error', $.sass.logError))
     .pipe($.pleeease(pleeeaseOptions))
     .pipe(gulp.dest(dir.dist))
     .pipe($.pleeease({minifier: true}))
@@ -79,19 +79,19 @@ gulp.task('sass-build', function(){
     .pipe(gulp.dest(dir.dist));
 });
 
-gulp.task('js', function(){
-  browserify(browserifyOptions)
-    .bundle()
-    .pipe(source(name.js.bundle))
-    .pipe(buffer())
-    .pipe($.uglify())
-    // .pipe($.rename({suffix: '.min'}))
-    .pipe(gulp.dest(dir.test))
-    .pipe(browserSync.reload({stream: true}));
-});
+gulp.task('browserify', $.watchify(function(watchify){
+  return gulp.src(dir.js + name.js.app)
+    .pipe(watchify({watch: watching}))
+    .pipe($.plumber({errorHandler: $.notify.onError('<%= error.message %>')}))
+    // .pipe(buffer())
+    .pipe($.streamify($.uglify()))
+    .pipe($.rename({basename: 'bundle'}))
+    .pipe(gulp.dest(dir.dest));
 
-gulp.task('js-build', function(){
-  return gulp.src(src.jsDist)
+}));
+
+gulp.task('js:build', function(){
+  return gulp.src(src.js)
     .pipe(gulp.dest(dir.dist))
     .pipe($.uglify())
     .pipe($.rename({suffix: '.min'}))
@@ -99,38 +99,27 @@ gulp.task('js-build', function(){
 });
 
 gulp.task('clean', function(){
-  del([dir.test + '**/*{css,js}', dir.dist + '**/*']);
+  return del([dir.dest + '**/*{css,js}', dir.dist + '**/*']);
 });
 
-gulp.task('build', function(){
+gulp.task('build', function(callback){
   runSequence(
     'clean',
-    ['sass', 'js'],
-    ['sass-build', 'js-build']
+    ['sass', 'browserify'],
+    ['js:build', 'css:build'],
+    callback
   );
 });
 
-gulp.task('browserSync', function(){
-  browserSync({
-    server: {
-      baseDir: dir.test
-    },
-    browser: 'google chrome',
-    reloadDelay: 1500
-  });
+gulp.task('enable-watch-mode', function(){
+  watching = true;
 });
 
-// Watch
+gulp.task('watchify', ['enable-watch-mode', 'browserify']);
 
-gulp.task('default', ['browserSync', 'sass', 'js'], function(){
+gulp.task('default', ['webserver', 'watchify', 'sass'], function(){
 
-  $.watch(src.sass, function(){
+  $.watch(src.scss, function(){
     return gulp.start(['sass']);
   });
-
-  $.watch(src.js, function(){
-    return gulp.start(['js']);
-  });
-
-  $.watch(src.html).on('change', browserSync.reload);
 });
