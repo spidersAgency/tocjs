@@ -51,7 +51,7 @@ $('.toc-src').tocjs();
 ## Options
 
 ```
-$('.toc-src').toc({
+$('.toc-src').tocjs({
   excludes: 'toc-exclude',
   headingNumber: true,
   headings: 'h2, h3',
@@ -59,8 +59,8 @@ $('.toc-src').toc({
   min: 4,
   output: '.toc',
   title: 'Contents',
-  titleElement: 'h2'
-  tocNumber: true,
+  titleElement: 'h2',
+  tocNumber: true
 });
 ```
 
