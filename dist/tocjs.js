@@ -161,7 +161,7 @@
       if(listItemNum >= options.min){
         $list.append(listItem);
         $output.append($list);
-        outputHtml = $output.html();
+        var outputHtml = $output.html();
         $(options.output).append(outputHtml);
       }
     });
