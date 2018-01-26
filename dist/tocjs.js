@@ -67,26 +67,26 @@
         .replace(/　/g, '')
         .replace(/\s+/, ' ');
 
-      includes = $.trim(options.includes);
+      var includes = $.trim(options.includes);
 
       //目次のタイトルを生成する
       if (options.title) {
-        $title = $('<' + options.titleElement + '>', {
+        var $title = $('<' + options.titleElement + '>', {
             'class': 'toc-heading',
             text: options.title
         });
         $output.prepend($title);
       }
       //空のULを作成する
-      $list = $('<ul>', {
+      var $list = $('<ul>', {
         class: 'toc-list'
       });
 
       //オプション[includes]に要素が指定された場合はその要素のみを対象とする｡
       if (includes) {
-        $target = $(this).find(includes);
+        var $target = $(this).find(includes);
       } else {
-        $target = $(this)
+        var $target = $(this)
           .find(headings)
           .not('.toc-heading');
       }
