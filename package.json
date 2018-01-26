@@ -1,6 +1,6 @@
 {
   "name": "tocjs",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "TocJS is a jQuery plugin that automatically create a table of contents of the article.",
   "main": "./dist/tocjs.js",
   "style": "./dist/tocjs.css",
